@@ -23,7 +23,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         }
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
     fun submitList(list: List<Article>) {
         differ.submitList(list)
