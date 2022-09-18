@@ -15,9 +15,11 @@ import com.androiddevs.mvvmnewsapp.adapter.NewsAdapter
 import com.androiddevs.mvvmnewsapp.databinding.FragmentSearchNewsBinding
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
+import com.androiddevs.mvvmnewsapp.util.Constants.SEARCH_NEWS_TIME_DELAY
 import com.androiddevs.mvvmnewsapp.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchNewsFragment : Fragment() {
@@ -54,8 +56,11 @@ class SearchNewsFragment : Fragment() {
         binding.etSearch.addTextChangedListener { editable ->
             job?.cancel()
             job = lifecycleScope.launch(Dispatchers.Main) {
-                if (editable.toString().isNotEmpty()) {
-                    viewModel.searchForNews(editable.toString())
+                delay(SEARCH_NEWS_TIME_DELAY)
+                editable?.let {
+                    if (it.toString().isNotEmpty()) {
+                        viewModel.searchForNews(it.toString())
+                    }
                 }
             }
         }

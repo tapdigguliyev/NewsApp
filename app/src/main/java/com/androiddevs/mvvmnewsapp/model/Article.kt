@@ -12,20 +12,20 @@ import kotlinx.android.parcel.Parcelize
 data class Article(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
-    val author: String,
-    val content: String,
-    val description: String,
-    val publishedAt: String,
-    val source: Source,
-    val title: String,
-    val url: String,
-    val urlToImage: String
+    val author: String?,
+    val content: String?,
+    val description: String?,
+    val publishedAt: String?,
+    val source: Source?,
+    val title: String?,
+    val url: String?,
+    val urlToImage: String?
 ) : Parcelable {
 
     override fun hashCode(): Int {
         var result = id.hashCode()
-        if(url.isEmpty()){
-            result = 31 * result + url.hashCode()
+        if(url?.isEmpty() == true){
+            result = (31 * result) + url.hashCode()
         }
         return result
     }
